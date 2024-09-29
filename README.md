@@ -29,17 +29,6 @@ O sistema possui uma sessão de cadastro e login para controle de acesso, difere
 
 Além de otimizar a eficiência operacional, o sistema visa melhorar a segurança ao monitorar áreas de risco e trajetos de alto tráfego, contribuindo para uma melhor gestão de recursos e redução de custos. Esse projeto se alinha à visão da John Deere de incorporar tecnologias de ponta e soluções IoT, posicionando a empresa na vanguarda da Indústria 4.0.
 
-![1](https://github.com/user-attachments/assets/ccf6af74-8a7c-435e-87cb-abc95218de95)
-![2](https://github.com/user-attachments/assets/dcf0cfc4-e27f-41ca-bbf3-b8ecddc7c26b)
-![3](https://github.com/user-attachments/assets/92dfee5b-059e-495e-b7f1-0acd6945dd30)
-![4](https://github.com/user-attachments/assets/71cb55e2-ea52-477b-aaea-dac5aa249d65)
-![5](https://github.com/user-attachments/assets/f4b5eb7d-c11d-4143-aed5-3a6ecbb79be6)
-![6](https://github.com/user-attachments/assets/db573efd-d9df-49a9-8170-f410a9009dd3)
-![7](https://github.com/user-attachments/assets/dcf6adad-fced-4865-b5a6-41af71668c46)
-![8](https://github.com/user-attachments/assets/9896707e-797e-4447-8923-b187f7c905de)
-![9](https://github.com/user-attachments/assets/d12d9b8f-0337-4f2f-8fd4-a8a88988c67b)
-
-
 
 
 

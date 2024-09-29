@@ -1,0 +1,84 @@
+import streamlit as st
+from pages import cadastro
+from pages import login
+from pages import operador
+from pages import funcionario
+from database.models import get_user_full_name  # Certifique-se de ter essa função no models.py
+import pages.avisos  # Para funções de avisos
+import pages.calendario  # Para funções relacionadas ao calendário
+import pages.meu_historico  # Para histórico
+import pages.tarefas  # Para funções de tarefas
+from pages import meu_perfil
+from utils import sair
+
+
+# Inicializar variáveis de sessão
+if 'logged_in' not in st.session_state:
+    st.session_state.logged_in = False
+if 'page' not in st.session_state:
+    st.session_state.page = "Login"  # Página padrão de início
+if 'user_type' not in st.session_state:
+    st.session_state.user_type = None
+if 'user_id' not in st.session_state:
+    st.session_state.user_id = None  # ID do usuário logado
+if 'user_full_name' not in st.session_state:
+    st.session_state.user_full_name = None  # Nome completo do usuário
+if 'mapa_iniciado' not in st.session_state:
+    st.session_state.mapa_iniciado = False  # Para verificar se o mapa foi iniciado
+
+def main():
+    # Se o usuário não estiver logado, mostrar a página de login ou cadastro
+    if not st.session_state.logged_in:
+        if st.session_state.page == "Login":
+            pages.login.login()  # Carrega a página de login
+        elif st.session_state.page == "Cadastro":
+            pages.cadastro.cadastro()  # Carrega a página de cadastro
+    else:
+        # Buscar o nome completo do usuário após o login
+        if not st.session_state.user_full_name:
+            st.session_state.user_full_name = get_user_full_name(st.session_state.user_id)
+
+        # Mostrar o menu lateral APÓS o login
+        show_sidebar()  
+        
+        # Mostrar o dashboard baseado no tipo de usuário
+        show_dashboard()
+
+def show_sidebar():
+    """Essa função só será chamada quando o usuário estiver logado"""
+    with st.sidebar:
+        st.title("Menu de Navegação")
+        if st.session_state.user_type == "Operador":
+            option = st.selectbox("Selecione uma página", ["Meu Perfil", "Avisos", "Calendário", "Meu Histórico", "Tarefas", "Sair"])
+        elif st.session_state.user_type == "Funcionário":
+            option = st.selectbox("Selecione uma página", ["Meu Perfil", "Minhas Solicitações", "Histórico de Solicitações", "Sair"])
+
+        # Atualizar a página baseada na seleção da sidebar
+        if option == "Meu Perfil":
+            st.session_state.page = "meu_perfil"
+        elif option == "Avisos":
+            st.session_state.page = "avisos"
+        elif option == "Calendário":
+            st.session_state.page = "calendario"
+        elif option == "Meu Histórico":
+            st.session_state.page = "meu_historico"
+        elif option == "Tarefas":
+            st.session_state.page = "tarefas"
+        elif option == "Minhas Solicitações":
+            st.session_state.page = "minhas_solicitacoes"
+        elif option == "Histórico de Solicitações":
+            st.session_state.page = "historico_solicitacoes"
+        elif option == "Sair":
+            sair()
+
+def show_dashboard():
+    user_type = st.session_state.user_type
+    if user_type == "Funcionário":
+        pages.funcionario.funcionario_dashboard()  # Chamar a função de dashboard do funcionário
+    elif user_type == "Operador":
+        pages.operador.operador_dashboard()  # Chamar a função de dashboard do operador
+
+
+
+if __name__ == "__main__":
+    main()
